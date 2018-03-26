@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
+import * as actions from '../../actions';
 
 class Signin extends Component {
   handleFormSubmit({ email, password }) {
     console.log(email, password);
+    this.props.signinUser({ email, password });
   }
 
   render() {
@@ -26,7 +29,11 @@ class Signin extends Component {
   }
 }
 
+Signin.propTypes = {
+  signinUser: PropTypes.func.isRequired,
+};
+
 export default reduxForm({
   form: 'signin',
-  fields: ['email', 'password']
-})(Signin);
+  fields: ['email', 'password'],
+}, null, actions)(Signin);
