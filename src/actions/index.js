@@ -1,8 +1,17 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER } from './types';
+import { AUTH_USER, AUTH_ERROR } from './types';
 
 const routeUrl = 'http://localhost:3090';
+
+
+export function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: error,
+  };
+}
+
 
 export function signinUser({ email, password }) {
   return (dispatch) => {
@@ -13,6 +22,7 @@ export function signinUser({ email, password }) {
         // - update state to say authenticated
         dispatch({ type: AUTH_USER });
         // - savr jwt token
+        localStorage.setItem('token', response.data.token);
         // - redirect
         browserHistory.push('/feature');
       })
@@ -20,8 +30,8 @@ export function signinUser({ email, password }) {
 
         // bad
         // - show error
+        dispatch(authError('Bad login info'));
       });
   };
 }
 
-export function test() {}
