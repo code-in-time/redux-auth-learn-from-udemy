@@ -16,7 +16,7 @@ export default function (state = {
       return { ...state, authenticated: false, error: action.payload };
 
     default:
-      console.log('actions don match');
+    //   console.log('actions don match');
   }
   return state;
 }

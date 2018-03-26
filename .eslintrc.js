@@ -6,5 +6,7 @@ module.exports = {
     },
     "rules": {
         "react/jsx-filename-extension": "false",
+        "jsx-a11y/anchor-is-valid": "true",
+        "jsx-a11y/label-has-for": "false",
     }
 };
