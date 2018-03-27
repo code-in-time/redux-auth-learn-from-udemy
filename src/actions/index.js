@@ -41,3 +41,24 @@ export function signinUser({ email, password }) {
   };
 }
 
+export function signupUser({ email, password }) {
+  return (dispatch) => {
+    // sub email to server
+    axios.post(`${routeUrl}/signup`, { email, password })
+      .then((response) => {
+        // good
+        // - update state to say authenticated
+        dispatch({ type: AUTH_USER });
+        // - savr jwt token
+        localStorage.setItem('token', response.data.token);
+        // - redirect
+        browserHistory.push('/feature');
+      })
+      .catch((response) => {
+        // bad
+        // - show error
+        dispatch(authError(response.response.data.error));
+      });
+  };
+}
+

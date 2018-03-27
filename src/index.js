@@ -11,6 +11,7 @@ import Signout from './components/auth/Signout';
 import Signup from './components/auth/Signup';
 import Feature from './components/Feature';
 import reducers from './reducers';
+import HOCAuth from './components/HOCAuth';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
@@ -21,7 +22,7 @@ ReactDOM.render(
         <Route path="signin" component={Signin} />
         <Route path="signout" component={Signout} />
         <Route path="signup" component={Signup} />
-        <Route path="feature" component={Feature} />
+        <Route path="feature" component={HOCAuth(Feature)} />
       </Route>
     </Router>
   </Provider>
